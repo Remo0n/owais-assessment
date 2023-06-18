@@ -1,4 +1,4 @@
-export const dynamic = "auto";
+export const dynamic = "force-dynamic";
 
 import Blob from "./components/Blob/Blob";
 import getForms from "./actions/getForms";
