@@ -1,95 +1,51 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+import Blob from "./components/Blob/Blob";
+import getForms from "./actions/getForms";
+import FormHeader from "./components/Form/FormHeader";
+import FormTable from "./components/Form/FormTable";
+import StatusFilter from "./components/Form/StatusFilter";
+import Container from "./components/UI/Container";
+import FormActions from "./components/Form/FormActions";
 
-export default function Home() {
+export default async function Home({ searchParams }) {
+  let formsData = await getForms(searchParams);
+
+  const allData = formsData.map((listing) => ({
+    ...listing,
+    action: <FormActions />,
+  }));
+  const columns = [
+    { field: "id", header: "ID" },
+    { field: "title", header: "Form Title" },
+    { field: "createdAt", header: "Date" },
+    { field: "status", header: "Status" },
+    { field: "action", header: "Actions" },
+  ];
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+    <>
+      <Container>
+        <FormHeader />
+        {formsData && <StatusFilter />}
+        <FormTable data={allData} columns={columns} />
+      </Container>
+      <Blob
+        EOneColor="#DCAC00"
+        ETwoColor="#2A2522"
+        EThreeColor="#DCAC00"
+        style={{ left: "calc(50% - 14rem)", top: 0 }}
+      />
+      <Blob
+        EOneColor="#004A91"
+        ETwoColor="#2A2522"
+        EThreeColor="#004A91"
+        style={{ left: -120, bottom: 0 }}
+      />
+      <Blob
+        EOneColor="#004A91"
+        ETwoColor="#2A2522"
+        EThreeColor="#004A91"
+        style={{ right: 0, bottom: 0 }}
+      />
+    </>
+  );
 }
