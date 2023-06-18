@@ -1,3 +1,5 @@
+export const dynamic = "auto";
+
 import Blob from "./components/Blob/Blob";
 import getForms from "./actions/getForms";
 import FormHeader from "./components/Form/FormHeader";
@@ -5,7 +7,6 @@ import FormTable from "./components/Form/FormTable";
 import StatusFilter from "./components/Form/StatusFilter";
 import Container from "./components/UI/Container";
 import FormActions from "./components/Form/FormActions";
-export const dynamic = "auto";
 
 export default async function Home({ searchParams }) {
   let formsData = await getForms(searchParams);
