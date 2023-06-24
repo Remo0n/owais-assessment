@@ -8,4 +8,5 @@ export const IconWrapper = styled.div`
   align-items: center;
   margin: 10px;
   background-color: ${(props) => props.bgColor};
+  cursor: pointer;
 `;

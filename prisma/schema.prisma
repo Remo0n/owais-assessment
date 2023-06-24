@@ -16,5 +16,8 @@ model Forms {
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
   status          String
+  address         String
+  accountName     String
+  accountNumber   String
   
 }

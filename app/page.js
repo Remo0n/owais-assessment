@@ -13,7 +13,7 @@ export default async function Home({ searchParams }) {
 
   const allData = formsData.map((listing) => ({
     ...listing,
-    action: <FormActions />,
+    action: <FormActions id={listing.id} />,
   }));
   const columns = [
     { field: "id", header: "ID" },
